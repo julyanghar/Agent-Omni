@@ -1,9 +1,9 @@
 # Agent-Omni
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
-[![Static Badge](https://img.shields.io/badge/xxxx.xxxxx-red?label=arXiv%20Paper)](https://arxiv.org/abs/xxxx.xxxxx)
+[![Static Badge](https://img.shields.io/badge/2511.02834-red?label=arXiv%20Paper)](https://arxiv.org/abs/2511.02834)
 
-The official implementation for the paper "[Agent-Omni: Test-Time Multimodal Reasoning via Model Coordination for Understanding Anything](https://arxiv.org/abs/xxxx.xxxxx)".
+The official implementation for the paper "[Agent-Omni: Test-Time Multimodal Reasoning via Model Coordination for Understanding Anything](https://arxiv.org/abs/2511.02834)".
 
 Agent-Omni is a modular framework that enables test-time multimodal reasoning by coordinating existing foundation models through a master-agent system. Instead of end-to-end fine-tuning, the master agent interprets user intent, delegates subtasks to modality-specific agents (text, image, audio, video), and integrates their outputs into coherent responses. This design allows flexible, interpretable, and extensible omni-modal understanding across diverse input combinations.
 
@@ -86,7 +86,7 @@ python agent_test.py
                   Wei Wang and
                   Ravender Pal Singh},
   title        = {Agent-Omni: Test-Time Multimodal Reasoning via Model Coordination for Understanding Anything},
-  journal      = {arXiv preprint arXiv:xxxx.xxxxx},
+  journal      = {arXiv preprint arXiv:2511.02834},
   year         = {2025}
 }
 ```
