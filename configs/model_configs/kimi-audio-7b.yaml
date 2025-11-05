@@ -1,0 +1,6 @@
+api_provider: openai
+model_id: moonshotai/Kimi-Audio-7B-Instruct
+base_url: http://localhost:8005/v1
+params:
+  max_tokens: 8192
+  temperature: 0

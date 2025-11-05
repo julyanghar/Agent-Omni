@@ -1,0 +1,9 @@
+api_provider: openai
+model_id: Isotr0py/LLaVA-Video-7B-Qwen2-hf
+base_url: http://localhost:8006/v1
+max_image_input: 10
+max_frames_num: 60
+image_size: [336, 336]
+params:
+  max_tokens: 512
+  temperature: 0

@@ -1,0 +1,6 @@
+api_provider: openai
+model_id: Qwen/Qwen3-4B-Thinking-2507
+base_url: http://localhost:8009/v1
+params:
+  max_tokens: 8192
+  temperature: 0

@@ -1,0 +1,7 @@
+api_provider: openai
+model_id: Qwen/Qwen3-Omni-30B-A3B-Instruct
+base_url: https://api.siliconflow.cn/v1
+api_key_name: siliconflow_api_key
+params:
+  max_tokens: 8192
+  temperature: 0

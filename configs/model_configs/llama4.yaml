@@ -1,0 +1,7 @@
+api_provider: bedrock 
+model_id: us.meta.llama4-maverick-17b-instruct-v1:0
+max_image_input: 3
+image_size: [368, 368]
+params:
+  max_tokens: 8192
+  temperature: 0

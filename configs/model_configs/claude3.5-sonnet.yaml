@@ -1,0 +1,6 @@
+api_provider: bedrock 
+model_id: us.anthropic.claude-3-5-sonnet-20240620-v1:0
+max_image_input: 20
+params:
+  max_tokens: 8192
+  temperature: 0

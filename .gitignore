@@ -1,0 +1,13 @@
+__pycache__
+image/
+images/
+err*
+*.output
+exp_*
+datasets/
+evaluation/evaluation_*
+text/
+image/
+video/
+audio/
+omni/

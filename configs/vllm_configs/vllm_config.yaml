@@ -1,0 +1,13 @@
+vllm_commands:
+  qwen2-audio-7b: 'python -m vllm.entrypoints.openai.api_server --model Qwen/Qwen2-Audio-7B-Instruct --port 8000 --dtype=bfloat16 --tensor-parallel-size 4 --trust-remote-code'
+  # qwen3-30b-a3b: 'python -m vllm.entrypoints.openai.api_server --model Qwen/Qwen3-30B-A3B-Instruct-2507 --port 8001 --dtype=bfloat16 --tensor-parallel-size 4 --trust-remote-code'
+  qwen2.5-omni: 'python -m vllm.entrypoints.openai.api_server --model Qwen/Qwen2.5-Omni-7B --port 8002 --dtype=bfloat16 --tensor-parallel-size 4 --trust-remote-code'
+  # gpt-oss-20b: 'python -m vllm.entrypoints.openai.api_server --model openai/gpt-oss-20b --port 8003 --tensor-parallel-size 4 --trust-remote-code'
+  # audio-flamingo-3: 'python -m vllm.entrypoints.openai.api_server --model nvidia/audio-flamingo-3 --port 8004 --dtype=bfloat16 --tensor-parallel-size 4 --trust-remote-code'
+  # kimi-audio-7b: 'python -m vllm.entrypoints.openai.api_server --model moonshotai/Kimi-Audio-7B-Instruct --port 8005 --dtype=bfloat16 --tensor-parallel-size 4 --trust-remote-code '
+  llava-video-7b: 'python -m vllm.entrypoints.openai.api_server --model Isotr0py/LLaVA-Video-7B-Qwen2-hf --port 8006 --dtype=bfloat16 --tensor-parallel-size 4 --trust-remote-code'
+  # llava-next-video-7b: '/global/homes/h/huawei7/hl3352/anaconda3/envs/UnderstandAnything/bin/python -m vllm.entrypoints.openai.api_server --model llava-hf/LLaVA-NeXT-Video-7B-hf --port 8007 --dtype=bfloat16 --tensor-parallel-size 4 --trust-remote-code --limit-mm-per-prompt image=40'
+  qwen3-4b-instruct: 'python -m vllm.entrypoints.openai.api_server --model Qwen/Qwen3-4B-Instruct-2507 --port 8008 --dtype=bfloat16 --tensor-parallel-size 4 --trust-remote-code'
+  qwen3-4b-thinking: 'python -m vllm.entrypoints.openai.api_server --model Qwen/Qwen3-4B-Thinking-2507 --port 8009 --dtype=bfloat16 --tensor-parallel-size 4 --trust-remote-code'
+  phi4-multimodal-instruct: 'python -m vllm.entrypoints.openai.api_server --model microsoft/Phi-4-multimodal-instruct --port 8010 --dtype auto --trust-remote-code --max-model-len 131072 --enable-lora --max-lora-rank 320 --limit-mm-per-prompt.image 3 --limit-mm-per-prompt.audio 3 --max-loras 2 --lora-modules speech=/global/homes/h/huawei7/hl3352/LLMs/UnderstandAnything/main/models/Phi-4-multimodal-instruct/speech-lora vision=/global/homes/h/huawei7/hl3352/LLMs/UnderstandAnything/main/models/Phi-4-multimodal-instruct/vision-lora --tensor-parallel-size 4'
+

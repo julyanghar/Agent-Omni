@@ -1,0 +1,5 @@
+api_provider: local
+model_id: openai/gpt-oss-20b
+params:
+  max_tokens: 8192
+  temperature: 0

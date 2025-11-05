@@ -1,0 +1,16 @@
+langgraph==0.6.4
+boto3
+openai
+datasets
+cmake
+av
+imgcat
+librosa
+decord
+vllm
+langchain==0.3.27
+langchain-aws==0.2.30
+langchain-openai==0.3.29
+langchain-community==0.3.27
+vllm[audio]
+yq

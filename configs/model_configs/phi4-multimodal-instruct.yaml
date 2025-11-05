@@ -1,0 +1,9 @@
+api_provider: openai
+model_id: microsoft/Phi-4-multimodal-instruct
+base_url: http://localhost:8010/v1
+max_image_input: 3
+max_audio_input: 3
+params:
+  max_tokens: 2048
+  temperature: 0.7
+  repetition_penalty: 1.05

@@ -1,0 +1,6 @@
+api_provider: openai
+model_id: nvidia/audio-flamingo-3
+base_url: http://localhost:8004/v1
+params:
+  max_tokens: 8192
+  temperature: 0
