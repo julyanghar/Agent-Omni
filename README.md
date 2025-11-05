@@ -9,7 +9,7 @@ Agent-Omni is a modular framework that enables test-time multimodal reasoning by
 
 ## Installation
 
-```
+```bash
 git clone https://github.com/huawei-lin/Agent-Omni.git
 cd Agent-Omni
 
@@ -21,7 +21,7 @@ pip install -r requirements.txt
 ## Quick Start
 
 Here's an example using `Qwen/Qwen3-Omni-30B-A3B-Instruct` on [SiliconFlow](https://www.siliconflow.cn/) (setup is similar to OpenAI):
-```
+```bash
 export siliconflow_api_key=${your_api_key}
 ```
 
@@ -39,7 +39,7 @@ params:
 ```
 
 ### Run a Vanilla LLM
-```
+```bash
 cd test
 python vanilla_test.py --config_path ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
 ```
@@ -47,7 +47,7 @@ python vanilla_test.py --config_path ../configs/model_configs/qwen3-omni-30b-a3b
 ### Run Agent-Omni
 
 Agent-Omni configurations are defined in `test/config.yaml`:
-```
+```yaml
 model:
   master_agent: ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
   text_agent: ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
@@ -65,7 +65,7 @@ system:
 You can assign different models for each modality as needed.
 
 Then simply run:
-```
+```bash
 cd test
 python agent_test.py
 ```
@@ -77,6 +77,7 @@ python agent_test.py
 - No fine-tuning is required — the system operates fully at test time.
 
 ## Citation
+```
 @article{agent-omni,
   author       = {Huawei Lin and
                   Yunzhi Shi and
@@ -88,7 +89,7 @@ python agent_test.py
   journal      = {arXiv preprint arXiv:xxxx.xxxxx},
   year         = {2025}
 }
-
+```
 
 
 
