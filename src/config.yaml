@@ -44,5 +44,5 @@ agents:
   names: ["text_agent", "image_agent", "video_agent", "audio_agent"]
 
 system:
-  retry_times: 10
+  retry_times: 2
 

@@ -1,0 +1,14 @@
+model:
+  master_agent: ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
+  text_agent: ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
+  image_agent: ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
+  video_agent: ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
+  audio_agent: ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
+
+agents:
+  supported: ["text", "image", "video", "audio"]
+  names: ["text_agent", "image_agent", "video_agent", "audio_agent"]
+
+system:
+  retry_times: 10
+

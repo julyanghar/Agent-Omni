@@ -1,9 +1,9 @@
 model:
-  master_agent: ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
-  text_agent: ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
-  image_agent: ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
-  video_agent: ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
-  audio_agent: ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
+  master_agent: ../configs/model_configs/gemini-2.5-flash.yaml
+  text_agent: ../configs/model_configs/gemini-2.5-flash.yaml
+  image_agent: ../configs/model_configs/gemini-2.5-flash.yaml
+  video_agent: ../configs/model_configs/gemini-2.5-flash.yaml
+  audio_agent: ../configs/model_configs/gemini-2.5-flash.yaml
 
 agents:
   supported: ["text", "image", "video", "audio"]

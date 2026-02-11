@@ -15,6 +15,8 @@ config_path = args.config_path
 
 modality_list = ["text", "image", "video", "audio"]
 
+# modality_list = ["audio"]
+
 text_path = "./media/text.txt"
 image_path = "./media/image.jpeg"
 video_path = "./media/video.mp4"

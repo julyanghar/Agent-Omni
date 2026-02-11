@@ -1,4 +1,4 @@
-api_provider: openai
+api_provider: local
 model_id: Qwen/Qwen2-Audio-7B-Instruct
 base_url: http://localhost:8000/v1
 params:

@@ -1,0 +1,6 @@
+api_provider: local
+model_id: Qwen/Qwen2.5-Omni-3B
+base_url: http://localhost:8002/v1
+params:
+  max_tokens: 8192
+  temperature: 0
