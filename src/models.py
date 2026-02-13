@@ -317,8 +317,8 @@ class ModelInvokeWrapper:
 master_model = load_model(config["model"]["master_agent"])
 # text_model: 文本处理专用模型
 text_model = load_model(config["model"].get("text_agent", None))
-# image_model: 图像处理专用模型
-image_model = load_model(config["model"].get("image_agent", None))
+# image_model: 图像处理专用模型（当前未使用）
+image_model = None  # 图像模态已禁用，如需恢复请在 graph.py 中重新注册相关节点并在此加载模型
 # video_model: 视频处理专用模型
 video_model = load_model(config["model"].get("video_agent", None))
 # audio_model: 音频处理专用模型

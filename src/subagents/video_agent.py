@@ -9,12 +9,14 @@ from io import BytesIO
 from PIL import Image
 from decord import VideoReader
 
+
 def image_to_base64(image_array):
     image = Image.fromarray(image_array)
     buffered = BytesIO()
     image.save(buffered, format="PNG")
     img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
     return img_str
+
 
 def sample_frames(vr, video_config={}, fps=1, force_sample=False):
     if isinstance(vr, str):
@@ -44,6 +46,7 @@ def sample_frames(vr, video_config={}, fps=1, force_sample=False):
     spare_frames = np.stack(resized_frames)
     spare_frames = [Image.fromarray(image_array) for image_array in spare_frames]
     return spare_frames, frame_time, video_time
+
 
 def generate(state, questions):
     if questions is None or len(questions) == 0:
@@ -75,7 +78,7 @@ Instructions:
         state["video"] = [state["video"]]
     for video in state['video']:
         frames, _, _  = sample_frames(video, config["model"]["video_agent"])
-        image_batch_size = config["model"]["video_agent"].get("max_image_input", len(frames)) # some models has max limit for image input
+        image_batch_size = config["model"]["video_agent"].get("max_image_input", len(frames))  # some models has max limit for image input
         for image_batch_begin in range(0, len(frames), image_batch_size):
             messages_batch = []
             for question in questions:
@@ -129,23 +132,41 @@ def video_agent(state: State):
     }
 
 
-def video_summarize(state: State):
-    if ("video" not in state.keys() or
-        state["video"] is None or 
-        len(state["video"]) == 0 or
-        state["video"][0] == None):
+class VideoSummarizeNode:
+    """
+    类节点版本的视频摘要节点，实现 __call__ 以便用于 StateGraph。
+    """
+
+    def __init__(self, cfg):
+        self.config = cfg
+
+    def __call__(self, state: State):
+        if ("video" not in state.keys() or
+            state["video"] is None or 
+            len(state["video"]) == 0 or
+            state["video"][0] is None):
+            return {
+                "video_summary": None
+            }
+
+        questions = ["Summarize the provided video."]
+        result = generate(state, questions)[0]
+
+        # print("=" * 10, "video_agent summary result", "=" * 10)
+        # print(result.content)
+
         return {
-            "video_summary": None
+            "video_summary": result.content,
         }
 
 
-    questions = ["Summarize the provided video."]
-    result = generate(state, questions)[0]
+# 单例实例，供 graph 使用
+video_summarize_node = VideoSummarizeNode(config)
 
-    # print("=" * 10, "video_agent summary result", "=" * 10)
-    # print(result.content)
 
-    return {
-        "video_summary": result.content,
-    }
+def video_summarize(state: State):
+    """
+    兼容旧接口的函数封装，内部委托给 VideoSummarizeNode 实例。
+    """
+    return video_summarize_node(state)
 

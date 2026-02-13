@@ -3,6 +3,7 @@ from ..state import State
 from ..config import config
 from langchain_core.messages import SystemMessage, AIMessage, HumanMessage, ToolMessage
 
+
 def generate(state, questions):
     if questions is None or len(questions) == 0:
         return questions
@@ -31,7 +32,7 @@ Instructions:
     results = None
     if not isinstance(state["audio"], list):
         state["audio"] = [state["audio"]]
-    audio_batch_size = config["model"]["audio_agent"].get("max_audio_input", 1) # some models has max limit for audio input
+    audio_batch_size = config["model"]["audio_agent"].get("max_audio_input", 1)  # some models has max limit for audio input
     for audio_batch_begin in range(0, len(state['audio']), audio_batch_size):
         messages_batch = []
         for question in questions:
@@ -85,23 +86,41 @@ def audio_agent(state: State):
     }
 
 
-def audio_summarize(state: State):
-    if ("audio" not in state.keys() or
-        state["audio"] is None or 
-        len(state["audio"]) == 0 or
-        state["audio"][0] == None):
-        return {
-            "audio_summary": None
-        }
+class AudioSummarizeNode:
+    """
+    类节点版本的音频摘要节点，实现 __call__ 以便用于 StateGraph。
+    """
 
+    def __init__(self, cfg):
+        self.config = cfg
 
-    questions = ["Summarize the provided audio."]
-    result = generate(state, questions)[0]
+    def __call__(self, state: State):
+        if ("audio" not in state.keys() or
+            state["audio"] is None or 
+            len(state["audio"]) == 0 or
+            state["audio"][0] is None):
+            return {
+                "audio_summary": None
+            }
+
+        questions = ["Summarize the provided audio."]
+        result = generate(state, questions)[0]
 
 #     print("=" * 10, "sumarize audio_agent", "=" * 10)
 #     print(result)
 
-    return {
-        "audio_summary": result.content,
-    }
+        return {
+            "audio_summary": result.content,
+        }
+
+
+# 单例实例，供 graph 使用
+audio_summarize_node = AudioSummarizeNode(config)
+
+
+def audio_summarize(state: State):
+    """
+    兼容旧接口的函数封装，内部委托给 AudioSummarizeNode 实例。
+    """
+    return audio_summarize_node(state)
 

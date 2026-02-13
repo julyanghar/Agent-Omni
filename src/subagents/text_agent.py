@@ -88,27 +88,46 @@ def text_agent(state: State):
     }
 
 
-def text_summarize(state: State):
-    import time
-    start = time.time()
+class TextSummarizeNode:
+    """
+    类节点版本的文本摘要节点，实现 __call__ 以便用于 StateGraph。
+    """
 
-    if ("text" not in state.keys() or
-        state["text"] is None or 
-        len(state["text"]) == 0):
+    def __init__(self, cfg):
+        self.config = cfg
+
+    def __call__(self, state: State):
+        import time
+        start = time.time()
+
+        if ("text" not in state.keys() or
+            state["text"] is None or 
+            len(state["text"]) == 0):
+            return {
+                "text_summary": None
+            }
+
+        questions = ["Summarize the provided text."]
+
+        result = generate(state, questions)[0]
+
+#         print("=" * 10, "text_agent result", "=" * 10)
+#         print(result.content)
+        end = time.time()
+        # print(f\"[text_summary] Time taken: {end - start:.3f}s\")
+
         return {
-            "text_summary": None
+            "text_summary": postprocessing(result),
         }
 
-    questions = ["Summarize the provided text."]
 
-    result = generate(state, questions)[0]
+# 单例实例，供 graph 使用
+text_summarize_node = TextSummarizeNode(config)
 
-#     print("=" * 10, "text_agent result", "=" * 10)
-#     print(result.content)
-    end = time.time()
-    # print(f"[text_summary] Time taken: {end - start:.3f}s")
 
-    return {
-        "text_summary": postprocessing(result),
-    }
+def text_summarize(state: State):
+    """
+    兼容旧接口的函数封装，内部委托给 TextSummarizeNode 实例。
+    """
+    return text_summarize_node(state)
 

@@ -29,31 +29,35 @@ def get_messages(state, system_prompt, format_instructions):
    ]
 
 
-def master_reasoning(state: State):
-    # todo: 这里应该要针对不同模态判断一下，比如下一步可能不需要text agent，但是需要image agent
-    start = time.time()
+class MasterReasoningNode:
+    def __init__(self, model, config):
+        self.model = model
+        self.config = config
 
-    cur_round_num = 1 if "cur_round_num" not in state.keys() else state["cur_round_num"] + 1
-    input_summaries = combine_summaries(state)
-    histrical_message = combine_historical_message(state)
-    available_agent_info = combine_available_agent(state)
+    def __call__(self, state: State):
+        start = time.time()
 
-    class AgentInstruction(BaseModel):
-        agent_name: str = Field(
-                description=f"The identifier for the agent (selected from agent pool: {available_agent_info}) that are most suitable for handling this intent."
-        )
-        questions: conlist(str, min_length=1) = Field(
-            description="A list of specific questions or instructions for this agent."
-        )
-    
+        cur_round_num = 1 if "cur_round_num" not in state.keys() else state["cur_round_num"] + 1
+        input_summaries = combine_summaries(state)
+        histrical_message = combine_historical_message(state)
+        available_agent_info = combine_available_agent(state)
 
-    class MasterReasoningStructure(BaseModel):
-        user_intent: str = Field(
-            description="The user's goal or intention, typically inferred from a multimodal input or query."
-        )
-        agent_instructions: conlist(AgentInstruction, min_length=1) = Field(
-            description="A list of instructions for each agent, containing the agent name and related questions."
-        )
+        class AgentInstruction(BaseModel):
+            agent_name: str = Field(
+                    description=f"The identifier for the agent (selected from agent pool: {available_agent_info}) that are most suitable for handling this intent."
+            )
+            questions: conlist(str, min_length=1) = Field(
+                description="A list of specific questions or instructions for this agent."
+            )
+
+
+        class MasterReasoningStructure(BaseModel):
+            user_intent: str = Field(
+                description="The user's goal or intention, typically inferred from a multimodal input or query."
+            )
+            agent_instructions: conlist(AgentInstruction, min_length=1) = Field(
+                description="A list of instructions for each agent, containing the agent name and related questions."
+            )
 
 
     system_prompt = f"""You are the Reasoning Module in an "Understanding Anything" system. This system is designed to interpret user input across multiple modalities—text, image, video, and audio—by orchestrating existing foundation models through dynamic agents in several iterative reasoning loops. The system does not rely on fine-tuning or retraining.
@@ -98,10 +102,10 @@ You must not generate a final answer to the user's question. Your goal is reason
 
     parser = PydanticOutputParser(pydantic_object=MasterReasoningStructure)
     fixing_parser = OutputFixingParser.from_llm(parser=parser, llm=master_model.model)
-    format_instructions = parser.get_format_instructions() # format_instructions 告诉模型应该输出什么格式的数据
+    format_instructions = parser.get_format_instructions()
     while retry:
         try:
-            # 将 system_prompt 和 format_instructions 拼接起来 
+
             messages = get_messages(state, system_prompt, format_instructions)
             response = master_model.invoke(messages)
             try:
@@ -132,47 +136,9 @@ You must not generate a final answer to the user's question. Your goal is reason
     }
 
 
-def master_dispatcher(state: State):
-    return state
-
-
-class MasterDispatcher1Node:
-    """
-    Master Dispatcher 1 节点类
-    负责汇总各个 summarize 节点的结果，并传递给 master_reasoning
-    """
-    
-    def __init__(self, config):
-        """
-        初始化节点
-        
-        参数:
-            config: 系统配置字典
-        """
-        self.config = config
-    
+class MasterDispatcherNode:
     def __call__(self, state: State):
-        """
-        执行 dispatcher 逻辑（当前为 pass-through）
-        
-        参数:
-            state: 状态对象
-            
-        返回:
-            state: 原样返回状态（当前实现）
-        """
         return state
-
-
-# 创建 master_dispatcher_1 节点的单例实例
-master_dispatcher_1_node = MasterDispatcher1Node(config)
-
-
-def master_dispatcher_1(state: State):
-    """
-    保留原函数接口，作为类节点的薄包装（用于兼容性）
-    """
-    return master_dispatcher_1_node(state)
 
 
 def master_decision(state: State):

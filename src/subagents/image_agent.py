@@ -1,7 +1,17 @@
+"""
+NOTE:
+    当前版本未在 graph 中注册 `image_agent` / `ImageSummarizeNode`，
+    因此图像模态不会在工作流中被调用。保留本文件是为了将来需要时
+    可以方便地重新启用图像能力：
+        1. 在 `models.py` 中重新加载 `image_model`
+        2. 在 `graph.py` 中重新导入并注册 `image_agent` 和 `image_summarize_node`
+"""
+
 from ..models import image_model as model
 from ..state import State
 from ..config import config
 from langchain_core.messages import SystemMessage, AIMessage, HumanMessage, ToolMessage
+
 
 def generate(state, questions):
     if questions is None or len(questions) == 0:
@@ -29,7 +39,7 @@ Instructions:
 """
 
     results = None
-    image_batch_size = config["model"]["image_agent"].get("max_image_input", len(state['image'])) # some models has max limit for image input
+    image_batch_size = config["model"]["image_agent"].get("max_image_input", len(state['image']))  # some models has max limit for image input
     if not isinstance(state["image"], list):
         state["image"] = [state["image"]]
     for image_batch_begin in range(0, len(state['image']), image_batch_size):
@@ -84,20 +94,38 @@ def image_agent(state: State):
     }
 
 
-def image_summarize(state: State):
-    if ("image" not in state.keys() or
-        state["image"] is None or 
-        len(state["image"]) == 0 or
-        state["image"][0] == None):
+class ImageSummarizeNode:
+    """
+    类节点版本的图像摘要节点，实现 __call__ 以便用于 StateGraph。
+    """
+
+    def __init__(self, cfg):
+        self.config = cfg
+
+    def __call__(self, state: State):
+        if ("image" not in state.keys() or
+            state["image"] is None or 
+            len(state["image"]) == 0 or
+            state["image"][0] is None):
+            return {
+                "image_summary": None
+            }
+
+        questions = ["Summarize the provided image."]
+        result = generate(state, questions)[0]
+
         return {
-            "image_summary": None
+            "image_summary": result.content,
         }
 
 
-    questions = ["Summarize the provided image."]
-    result = generate(state, questions)[0]
+# 单例实例，供 graph 使用
+image_summarize_node = ImageSummarizeNode(config)
 
-    return {
-        "image_summary": result.content,
-    }
+
+def image_summarize(state: State):
+    """
+    兼容旧接口的函数封装，内部委托给 ImageSummarizeNode 实例。
+    """
+    return image_summarize_node(state)
 
