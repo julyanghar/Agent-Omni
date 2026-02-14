@@ -1,0 +1,28 @@
+[
+  {
+    "video_id": "Ec_lQgZ9wlg",
+    "question": "What visual elements were displayed immediately after Dr. Rajani's 'BOTOX WITHOUT THE BOTOX' video concluded?",
+    "model_answer": "B",
+    "ground_truth": "B",
+    "is_correct": true,
+    "qa_type": "Event Sequence",
+    "video_category": "Howto & Style",
+    "video_duration": "30s",
+    "skipped": false,
+    "skip_reason": "",
+    "api_call_failed": false
+  },
+  {
+    "video_id": "XUWxQYmiBQY",
+    "question": "At the moment the static shot of Obsidian Fury first appeared, which specific audio event was synchronized with it?",
+    "model_answer": "C",
+    "ground_truth": "A",
+    "is_correct": false,
+    "qa_type": "AV Event Alignment",
+    "video_category": "Howto & Style",
+    "video_duration": "30s",
+    "skipped": false,
+    "skip_reason": "",
+    "api_call_failed": false
+  }
+]

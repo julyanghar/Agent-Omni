@@ -1,13 +1,12 @@
 model:
-  master_agent: ../configs/model_configs/gemini-2.5-flash.yaml
-  text_agent: ../configs/model_configs/gemini-2.5-flash.yaml
-  image_agent: ../configs/model_configs/gemini-2.5-flash.yaml
-  video_agent: ../configs/model_configs/gemini-2.5-flash.yaml
-  audio_agent: ../configs/model_configs/gemini-2.5-flash.yaml
+  master_agent: ../configs/model_configs/gemini-2.0-flash.yaml
+  text_agent: ../configs/model_configs/gemini-2.0-flash.yaml
+  video_agent: ../configs/model_configs/gemini-2.0-flash.yaml
+  audio_agent: ../configs/model_configs/gemini-2.0-flash.yaml
 
 agents:
-  supported: ["text", "image", "video", "audio"]
-  names: ["text_agent", "image_agent", "video_agent", "audio_agent"]
+  supported: ["text", "video", "audio"]
+  names: ["text_agent", "video_agent", "audio_agent"]
 
 system:
   retry_times: 10

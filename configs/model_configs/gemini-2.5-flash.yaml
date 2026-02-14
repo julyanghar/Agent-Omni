@@ -1,7 +1,0 @@
-api_provider: google
-model_id: gemini-2.0-flash
-api_key_name: GOOGLE_API_KEY
-params:
-  temperature: 0
-  max_tokens: 8192
-

@@ -45,7 +45,7 @@ source ~/.bashrc  # 或 source ~/.zshrc
 
 ## 步骤 3：配置文件说明
 
-配置文件位于 `configs/model_configs/gemini-2.5-flash.yaml`：
+配置文件位于 `configs/model_configs/gemini-2.0-flash.yaml`：
 
 ```yaml
 api_provider: google
@@ -77,9 +77,9 @@ params:
 
 ```yaml
 model:
-  master_agent: ../configs/model_configs/gemini-2.5-flash.yaml
-  text_agent: ../configs/model_configs/gemini-2.5-flash.yaml
-  image_agent: ../configs/model_configs/gemini-2.5-flash.yaml
+  master_agent: ../configs/model_configs/gemini-2.0-flash.yaml
+  text_agent: ../configs/model_configs/gemini-2.0-flash.yaml
+  image_agent: ../configs/model_configs/gemini-2.0-flash.yaml
   # ... 其他 agent
 ```
 
@@ -88,10 +88,10 @@ model:
 ```yaml
 model:
   master_agent: ../configs/model_configs/qwen3-omni-30b-a3b-instruct.yaml
-  text_agent: ../configs/model_configs/gemini-2.5-flash.yaml
-  image_agent: ../configs/model_configs/gemini-2.5-flash.yaml
-  video_agent: ../configs/model_configs/gemini-2.5-flash.yaml
-  audio_agent: ../configs/model_configs/gemini-2.5-flash.yaml
+  text_agent: ../configs/model_configs/gemini-2.0-flash.yaml
+  image_agent: ../configs/model_configs/gemini-2.0-flash.yaml
+  video_agent: ../configs/model_configs/gemini-2.0-flash.yaml
+  audio_agent: ../configs/model_configs/gemini-2.0-flash.yaml
 ```
 
 ## 步骤 5：运行测试
@@ -191,7 +191,7 @@ from src.models import load_model
 from src.config import load_config
 
 # 加载配置
-config = load_config("configs/model_configs/gemini-2.5-flash.yaml")
+config = load_config("configs/model_configs/gemini-2.0-flash.yaml")
 
 # 加载模型
 model = load_model(config)

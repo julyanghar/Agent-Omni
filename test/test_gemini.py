@@ -34,7 +34,7 @@ def test_gemini_basic():
         print(f"✓ API Key 已设置: {api_key[:10]}...")
         
         # 加载配置
-        config_path = os.path.join(project_root, "configs", "model_configs", "gemini-2.5-flash.yaml")
+        config_path = os.path.join(project_root, "configs", "model_configs", "gemini-2.0-flash.yaml")
         config = load_config(config_path)
         print(f"✓ 配置文件加载成功: {config_path}")
         
@@ -66,7 +66,7 @@ def test_gemini_with_system_prompt():
     
     try:
         project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        config_path = os.path.join(project_root, "configs", "model_configs", "gemini-2.5-flash.yaml")
+        config_path = os.path.join(project_root, "configs", "model_configs", "gemini-2.0-flash.yaml")
         config = load_config(config_path)
         model = load_model(config)
         
@@ -97,7 +97,7 @@ def test_gemini_batch():
     
     try:
         project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        config_path = os.path.join(project_root, "configs", "model_configs", "gemini-2.5-flash.yaml")
+        config_path = os.path.join(project_root, "configs", "model_configs", "gemini-2.0-flash.yaml")
         config = load_config(config_path)
         model = load_model(config)
         
@@ -131,7 +131,7 @@ def test_gemini_media_invoke():
     
     try:
         project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        config_path = os.path.join(project_root, "configs", "model_configs", "gemini-2.5-flash.yaml")
+        config_path = os.path.join(project_root, "configs", "model_configs", "gemini-2.0-flash.yaml")
         config = load_config(config_path)
         model = load_model(config)
         

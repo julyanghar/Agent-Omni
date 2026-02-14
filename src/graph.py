@@ -59,6 +59,7 @@ def _build_graph():
     builder.add_edge(START, AUDIO_SUMMARIZE_NODE)
 
     # summarize 节点到 master_dispatcher_1
+    # 分析意图只需要text_summary，不需要video_summary和audio_summary
     builder.add_edge(
         [TEXT_SUMMARIZE_NODE, VIDEO_SUMMARIZE_NODE, AUDIO_SUMMARIZE_NODE],
         MASTER_DISPATCHER_1_NODE,

@@ -1,0 +1,41 @@
+{
+  "model_type": "gemini_av",
+  "execution_mode": "sequential",
+  "timestamp": "20260213_154642",
+  "processing_time_seconds": 6.59,
+  "overall": {
+    "items_requested": 2,
+    "items_skipped": 0,
+    "items_attempted": 2,
+    "api_call_failures": 0,
+    "items_evaluated": 2,
+    "overall_correct": 1,
+    "overall_accuracy": 0.5
+  },
+  "accuracy_by_qa_type": {
+    "AV Event Alignment": {
+      "correct": 0,
+      "total": 1,
+      "accuracy": 0.0
+    },
+    "Event Sequence": {
+      "correct": 1,
+      "total": 1,
+      "accuracy": 1.0
+    }
+  },
+  "accuracy_by_video_category": {
+    "Howto & Style": {
+      "correct": 1,
+      "total": 2,
+      "accuracy": 0.5
+    }
+  },
+  "accuracy_by_video_duration": {
+    "30s": {
+      "correct": 1,
+      "total": 2,
+      "accuracy": 0.5
+    }
+  }
+}

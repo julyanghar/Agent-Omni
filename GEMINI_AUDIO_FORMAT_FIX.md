@@ -134,7 +134,7 @@ from src.models import load_model
 from src.config import load_config
 
 # 加载 Gemini 模型配置
-config = load_config("configs/model_configs/gemini-2.5-flash.yaml")
+config = load_config("configs/model_configs/gemini-2.0-flash.yaml")
 model = load_model(config)
 
 # 准备音频内容
@@ -210,7 +210,7 @@ print(response.content)
 
 - `src/models.py` - 主要实现文件
 - `src/utils.py` - 包含 `normalize_audio_to_data_url` 函数
-- `configs/model_configs/gemini-2.5-flash.yaml` - Gemini 模型配置示例
+- `configs/model_configs/gemini-2.0-flash.yaml` - Gemini 模型配置示例
 
 ## 测试验证
 
